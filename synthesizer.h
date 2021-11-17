@@ -184,7 +184,7 @@ struct output {
 //全局变量
 FILE *fp;
 int n, n1, n2, ee_name_len, count, count_in, count_out, st, *p, qua, allcov, sign;
-char a[10000], file[20], filetxt[30], filectt[30], ee_name[20], v_name[20], clock_not[20];
+char a[10000], file[128], filectt[128], ee_name[20], v_name[20], clock_not[20];
 char reset_not[20], reg_string[20];
 IN in_head, *in, *clock, *reset;
 OUT out_head, *out, *out1;
