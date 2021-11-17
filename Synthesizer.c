@@ -31,27 +31,32 @@ int main()
 void extract()
 {
 	int i;
-	for(i=0;i<10000;i++)
-		a[i]=0;
+	
+	for (i = 0; i < 10000; ++i)
+		a[i] = 0;
+	
 	printf("请输入要综合的RTL级Verilog源文件的名称：");
- s1:gets(file);
-	strcpy(filetxt,file);
-	strcat(filetxt,".txt");
-	if((fp=fopen(filetxt,"r"))==NULL)
-	{
-		printf("\n文件%s不存在，请重新输入Verilog源文件名称：",filetxt);
+
+s1: gets(file);
+	strcpy(filetxt, file);
+	strcat(filetxt, ".txt");
+	
+	if ((fp = fopen(filetxt, "r")) == NULL) {
+		printf("\n文件%s不存在，请重新输入Verilog源文件名称：", filetxt);
 		goto s1;
 	}
-	for(i=0;(a[i]=fgetc(fp))!=EOF;i++);
-	a[i]=0;
+
+	for (i = 0; (a[i] = fgetc(fp)) != EOF; ++i);
+	a[i] = 0;
 	fclose(fp);
-	printf("\n%s的门级网表正在综合中，请稍等…\n",filetxt);
+	
+	printf("\n%s的门级网表正在综合中，请稍等…\n", filetxt);
 }
 void find_var()
 {
-	count_in=count_out=0;
-	in=&in_head;
-	out=&out_head;
+	count_in = count_out = 0;
+	in = &in_head;
+	out = &out_head;
 	input();
 	inout();
 	reg();
@@ -403,7 +408,7 @@ void display()
 			if (!out->p->clear_edge)
                 fprintf(fp, "%s,1'b1,", reset->name);
 			else
-                fprintf(fp,"%s,1'b1,",reset_not);
+                fprintf(fp,"%s,1'b1,", reset_not);
 		}
 
 		if (out->p->clock_edge)
@@ -1973,6 +1978,7 @@ int in_num()
 	
     return rv->p->in_p->num;
 }
+
 
 
 
