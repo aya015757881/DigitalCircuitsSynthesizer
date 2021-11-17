@@ -1311,7 +1311,7 @@ void gen_ee1(int idx)
                 ee1->p->in_p = in->p;
 	}
 
-	ee1=ee1->p;
+	ee1 = ee1->p;
 }
 
 void gen_ee2(int idx)
