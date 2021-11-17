@@ -35,14 +35,12 @@ void extract()
 	for (i = 0; i < 10000; ++i)
 		a[i] = 0;
 	
-	printf("请输入要综合的RTL级Verilog源文件的名称：");
+	printf("Please enter the name of the RTL level Verilog source file: ");
 
 s1: gets(file);
-	strcpy(filetxt, file);
-	strcat(filetxt, ".txt");
 	
-	if ((fp = fopen(filetxt, "r")) == NULL) {
-		printf("\n文件%s不存在，请重新输入Verilog源文件名称：", filetxt);
+	if ((fp = fopen(file, "r")) == NULL) {
+		printf("\nFile %s does not exit, please reenter the file name: ", file);
 		goto s1;
 	}
 
@@ -50,7 +48,7 @@ s1: gets(file);
 	a[i] = 0;
 	fclose(fp);
 	
-	printf("\n%s的门级网表正在综合中，请稍等…\n", filetxt);
+	printf("\nNetlist for %s is being generated, please wait...\n", file);
 }
 void find_var()
 {
@@ -360,7 +358,7 @@ void form_nl()
 void display()
 {
 	strcpy(filectt, file);
-	strcat(filectt, "_netlist.txt");
+	strcat(filectt, "_netlist.v");
 	
     fp = fopen(filectt, "w");
 
@@ -521,7 +519,7 @@ void display()
 
 	fprintf(fp, "endmodule\n");
 	fclose(fp);
-	printf("\n%s的门级网表文件%s已在综合器所在目录生成，请查看\n\n\n\n", filetxt, filectt);
+	printf("Netlist for %s has been generated.\n\n\n\n", file);
 }
 
 void clear()
@@ -1978,7 +1976,6 @@ int in_num()
 	
     return rv->p->in_p->num;
 }
-
 
 
 
