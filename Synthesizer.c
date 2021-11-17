@@ -398,40 +398,40 @@ void display()
         fprintf(fp, "D%d(", out->p->num);
 
 		if (out->p->clear_type == 2)
-            fprintf(fp, "1'b1,1'b1,");
+            fprintf(fp, "1'b1, 1'b1, ");
 		else if (out->p->clear_type) {
 			if (!out->p->clear_edge)
-                fprintf(fp, "1'b1,%s,", reset->name);
+                fprintf(fp, "1'b1, %s, ", reset->name);
 			else
-                fprintf(fp, "1'b1,%s,", reset_not);
+                fprintf(fp, "1'b1, %s, ", reset_not);
 		} else {
 			if (!out->p->clear_edge)
-                fprintf(fp, "%s,1'b1,", reset->name);
+                fprintf(fp, "%s, 1'b1, ", reset->name);
 			else
-                fprintf(fp,"%s,1'b1,", reset_not);
+                fprintf(fp,"%s,1'b1, ", reset_not);
 		}
 
 		if (out->p->clock_edge)
-            fprintf(fp, "%s,", clock->name);
+            fprintf(fp, "%s, ", clock->name);
 		else
-            fprintf(fp, "%s,", clock_not);
+            fprintf(fp, "%s, ", clock_not);
 		
         if (out->p->idx == -1)
-            fprintf(fp, "1'b%d,", out->p->dnum);
+            fprintf(fp, "1'b%d, ", out->p->dnum);
 		else if (!out->p->idx)
-            fprintf(fp, "%s,", in_name(out->p->dnum));
+            fprintf(fp, "%s, ", in_name(out->p->dnum));
 		else if (out->p->idx == 1)
-            fprintf(fp, "%s,", reg_str(out->p->dnum));
+            fprintf(fp, "%s, ", reg_str(out->p->dnum));
 		else if(out->p->idx == 2)
-            fprintf(fp, "qnout%d,", out->p->dnum);
+            fprintf(fp, "qnout%d, ", out->p->dnum);
 		else if (out->p->idx == 3)
-            fprintf(fp, "notout%d,", out->p->dnum);
+            fprintf(fp, "notout%d, ", out->p->dnum);
 		else if (out->p->idx == 4)
-            fprintf(fp, "andout%d,", out->p->dnum);
+            fprintf(fp, "andout%d, ", out->p->dnum);
 		else
-            fprintf(fp, "orout%d,", out->p->dnum);
+            fprintf(fp, "orout%d, ", out->p->dnum);
 		
-        fprintf(fp, "%s,qnout%d", reg_str(out->p->num), out->p->num);
+        fprintf(fp, "%s,qnout%d ", reg_str(out->p->num), out->p->num);
 		
         if (out->p->p != NULL)
             fprintf(fp, "),\n");
@@ -442,7 +442,7 @@ void display()
 	fprintf(fp, "not\n");
 	
     for (not_ = &not_head; not_->p != NULL; not_ = not_->p) {
-		fprintf(fp, "not%d(notout%d,%s)", not_->p->num, not_->p->num, in_name(not_->p->in));
+		fprintf(fp, "not%d(notout%d, %s)", not_->p->num, not_->p->num, in_name(not_->p->in));
 		if (not_->p->p != NULL)
             fprintf(fp, ",\n");
 		else
@@ -456,16 +456,16 @@ void display()
         fprintf(fp, "and%d(andout%d", and_->p->num, and_->p->num);
 		
         for (iu = &and_->p->in_head; iu->p != NULL; iu = iu->p)
-			fprintf(fp, ",%s", in_name(iu->p->n));
+			fprintf(fp, ", %s", in_name(iu->p->n));
 
 		for (ru = &and_->p->r_head; ru->p != NULL; ru = ru->p)
-			fprintf(fp, ",%s", reg_str(ru->p->n));
+			fprintf(fp, ", %s", reg_str(ru->p->n));
 
 		for (rnu = &and_->p->rn_head; rnu->p != NULL; rnu = rnu->p)
-			fprintf(fp, ",qnout%d", rnu->p->n);
+			fprintf(fp, ", qnout%d", rnu->p->n);
 
 		for (nu = &and_->p->not_head; nu->p != NULL; nu = nu->p)
-			fprintf(fp, ",notout%d", nu->p->n);
+			fprintf(fp, ", notout%d", nu->p->n);
 
 		if (and_->p->p != NULL)
             fprintf(fp, "),\n");
@@ -480,19 +480,19 @@ void display()
         fprintf(fp, "or%d(orout%d", or_->p->num, or_->p->num);
 
 		for (iu = &or_->p->in_head; iu->p != NULL; iu = iu->p)
-			fprintf(fp, ",%s", in_name(iu->p->n));
+			fprintf(fp, ", %s", in_name(iu->p->n));
 
 		for (ru = &or_->p->r_head; ru->p != NULL; ru = ru->p)
-			fprintf(fp,",%s", reg_str(ru->p->n));
+			fprintf(fp,", %s", reg_str(ru->p->n));
 		
         for (rnu = &or_->p->rn_head; rnu->p != NULL; rnu = rnu->p)
-			fprintf(fp, ",qnout%d", rnu->p->n);
+			fprintf(fp, ", qnout%d", rnu->p->n);
 
 		for (nu = &or_->p->not_head; nu->p != NULL; nu = nu->p)
-			fprintf(fp, ",notout%d", nu->p->n);
+			fprintf(fp, ", notout%d", nu->p->n);
 
 		for (au = &or_->p->and_head; au->p != NULL; au = au->p)
-			fprintf(fp, ",andout%d", au->p->n);
+			fprintf(fp, ", andout%d", au->p->n);
 
 		if (or_->p->p != NULL)
             fprintf(fp, "),\n");
@@ -504,14 +504,14 @@ void display()
 	
     for (tsg = &tsg_head; tsg->p != NULL; tsg = tsg->p) {
 		
-        fprintf(fp, "TSG%d(%s,", tsg->p->num, tsg->p->out_name);
+        fprintf(fp, "TSG%d(%s, ", tsg->p->num, tsg->p->out_name);
 		
         if (tsg->p->d_idx == -1)
-            fprintf(fp, "1'b%d,", tsg->p->data);
+            fprintf(fp, "1'b%d, ", tsg->p->data);
 		else
-            fprintf(fp, "%s,", reg_str(tsg->p->data));
+            fprintf(fp, "%s, ", reg_str(tsg->p->data));
 		
-        fprintf(fp, "%s", reg_str(tsg->p->ena));
+        fprintf(fp, "%s ", reg_str(tsg->p->ena));
 		
         if (tsg->p->p != NULL)
             fprintf(fp, "),\n");
