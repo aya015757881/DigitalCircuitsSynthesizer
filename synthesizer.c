@@ -360,13 +360,9 @@ void display()
 	int i;
 	
 	strcpy(filectt, file);
-	
 	for (i = 0; filectt[i] && filectt[i] != '.'; ++i);
-
 	filectt[i] = '\0';
-	
 	strcat(filectt, "_netlist.v");
-	
     fp = fopen(filectt, "w");
 
 	fprintf(fp, "`include \"D_trigger.v\"\n");
@@ -1983,7 +1979,6 @@ int in_num()
 	
     return rv->p->in_p->num;
 }
-
 
 
 
