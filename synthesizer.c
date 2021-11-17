@@ -6,7 +6,6 @@
 int main()
 {
 	while (1) {
-
 		extract();
 		find_var();
 		find_sm();
@@ -50,6 +49,7 @@ s1: gets(file);
 	
 	printf("\nNetlist for %s is being generated, please wait...\n", file);
 }
+
 void find_var()
 {
 	count_in = count_out = 0;
@@ -59,6 +59,7 @@ void find_var()
 	inout();
 	reg();
 }
+
 void find_sm()
 {
 	char c[20];
@@ -78,6 +79,7 @@ void find_sm()
 	first(c);
 	sm.end = n;
 }
+
 void find_pa()
 {
 	int i, j;
@@ -274,6 +276,7 @@ void find_ee()
 		}
 	}
 }
+
 void form_rv()
 {
 	for (out = &out_head; out->p != NULL; out = out->p) {
@@ -1310,6 +1313,7 @@ void gen_ee1(int idx)
 
 	ee1=ee1->p;
 }
+
 void gen_ee2(int idx)
 {
 	int i;
