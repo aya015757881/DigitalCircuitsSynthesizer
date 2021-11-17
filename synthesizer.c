@@ -357,7 +357,14 @@ void form_nl()
 
 void display()
 {
+	int i;
+	
 	strcpy(filectt, file);
+	
+	for (i = 0; filectt[i] && filectt[i] != '.'; ++i);
+
+	filectt[i] = '\0';
+	
 	strcat(filectt, "_netlist.v");
 	
     fp = fopen(filectt, "w");
@@ -1976,6 +1983,7 @@ int in_num()
 	
     return rv->p->in_p->num;
 }
+
 
 
 
