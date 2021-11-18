@@ -322,8 +322,3 @@ int check_not_st();
 
 char *in_name(int num);
 char *reg_str(int num);
-
-
-
-
-
