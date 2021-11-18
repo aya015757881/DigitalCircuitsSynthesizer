@@ -334,7 +334,7 @@ void form_bf()
 		p = (int*)calloc(n, sizeof(int));
 		count = (int)pow(2, n);
 		
-        if ((out->p->bf.idx=scan()) == 2) {
+        if ((out->p->bf.idx = scan()) == 2) {
 			combine();
 			sieve();
 		}
@@ -1486,7 +1486,7 @@ int check_clock_not()
 
 int check_reset_not()
 {
-	for (er = &er_head; er->p != NULL; er =er->p)
+	for (er = &er_head; er->p != NULL; er = er->p)
 		if (er->p->st)
             return 1;
 	
